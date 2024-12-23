@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Healthy Eating</title>
+    <style>
+        body {
+            background-color: #c9c2af;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f4f4f9;
+        }
+        .progress-bar {
+            width: 80%;
+            max-width: 800px;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            width: 0;
+            background: #BCB961;
+            border-radius: 10px;
+            transition: width 0.3s ease-in-out;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            height: 300px;
+        }
+        .container img {
+            width: 40%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+        .content {
+            flex: 1;
+            text-align: left;
+        }
+        .slide {
+            display: none;
+        }
+        .slide.active {
+            display: block;
+        }
+        .nav-buttons {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            background-color: #BCB961;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .quiz-options {
+            text-align: left;
+            margin: 20px auto;
+        }
+        .quiz-options label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .message {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .hidden {
+            display: none;
+        }
+
+.congratulations {
+    display: none;
+    position: fixed;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    width: 50%; /* 50% of the viewport width */
+    height: 50%; /* 50% of the viewport height */
+    transform: translate(-50%, -50%); /* Adjust the element to be truly centered */
+    background: url('https://i.imgur.com/DepLe53.gif') no-repeat center center / cover;
+    background-size: 100% auto; /* The background gif takes up 40% of the screen */
+    text-align: center;
+    color: white;
+    border-radius: 10px; /* Optional: adds rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: adds a shadow around the popup */
+}
+
+.congratulations h1 {
+    position: absolute;
+    top: -30%; /* Adjust the position to keep the text within the viewport */
+    left: 50%; /* Center the text horizontally */
+    transform: translateX(-50%); /* Center the text */
+    font-size: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+
+.congratulations .additional-gif {
+    width: 150px;
+    height: auto;
+    margin: 10px auto; /* 10px margin around the gif */
+}
+
+.congratulations button {
+    position: fixed;
+    bottom: -70px; /* Adjust to your desired distance from the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: none;
+    background-color: #BCB961;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.congratulations button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+    </style>
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+
+    <div class="container">
+        <!-- Dynamic Image -->
+        <img id="slideImage" src="https://i.imgur.com/c257gWk.jpeg" alt="Slide Image">
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Slide 1: Introduction -->
+            <div class="slide active" id="slide1">
+                <h1>Introduction to Healthy Eating</h1>
+                <p>Learn how to fuel your body and mind!</p>
+                <button id="startLearningBtn" onclick="nextSlide()">Start Learning</button>
+            </div>
+
+            <!-- Slide 2: Objectives -->
+            <div class="slide" id="slide2">
+                <h2>Objectives</h2>
+                <p>In this module, you will learn:</p>
+                <ul>
+                    <li>Benefits of Healthy Eating</li>
+                    <li>Tips for a Balanced Diet</li>
+                    <li>Pop Quiz</li>
+                </ul>
+            </div>
+
+            <!-- Slide 3: Benefits of Healthy Eating -->
+            <div class="slide" id="slide3">
+                <h2>Benefits of Healthy Eating</h2>
+                <p>Fuel your life with the right nutrition:</p>
+                <ul>
+                    <li>Better Energy Levels</li>
+                    <li>Improved Mood</li>
+                    <li>Weight Management</li>
+                </ul>
+            </div>
+
+            <!-- Slide 4: Better Energy Levels -->
+            <div class="slide" id="slide4">
+                <h2>Better Energy Levels</h2>
+                <ul>
+                    <li>Balanced nutrient intake</li>
+                    <li>Stable blood sugar levels</li>
+                    <li>Enhanced oxygen delivery</li>
+                </ul>
+            </div>
+
+            <!-- Slide 5: Improved Moods -->
+            <div class="slide" id="slide5">
+                <h2>Improved Moods</h2>
+                <ul>
+                    <li>Boost brain function</li>
+                    <li>Promote hormonal balance</li>
+                    <li>Reduce irritability</li>
+                </ul>
+            </div>
+
+            <!-- Slide 6: Weight Management -->
+            <div class="slide" id="slide6">
+                <h2>Weight Management</h2>
+                <ul>
+                    <li>Increase satiety with fiber-rich foods</li>
+                    <li>Boost metabolism</li>
+                    <li>Prevent overeating</li>
+                </ul>
+            </div>
+
+            <!-- Slide 7: Quiz -->
+            <div class="slide" id="slide7">
+                <h2>Pop Quiz: Test Your Knowledge!</h2>
+                <p>What is one benefit of healthy eating?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="quiz" value="wrong"> A. Reduced Energy</label>
+                    <label><input type="radio" name="quiz" value="correct"> B. Stable Blood Sugar Levels</label>
+                    <label><input type="radio" name="quiz" value="wrong"> C. Increased Irritability</label>
+                </div>
+                <button onclick="checkAnswer()">Submit</button>
+                <p class="message" id="quizMessage"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="congratulations" id="congratulations">
+        <h1>Congratulations! You have finished Module 1: Introduction to Healthy Eating</h1>
+<img src="https://imgur.com/RShdten.gif" class="additional-gif" alt="Celebration GIF">
+ <button id="nextModuleBtn">Go to Module 2: Nutrients</button> <!-- New button -->
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons" id="navButtons">
+        <button id="prevBtn" onclick="prevSlide()" disabled>Previous</button>
+        <button id="nextBtn" onclick="nextSlide()">Next</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 7;
+
+        const slideImages = [
+            "https://i.imgur.com/c257gWk.jpeg", // Slide 1
+            "https://i.imgur.com/ahnPbFZ.jpeg", // Slide 2
+            "https://i.imgur.com/VDk2mmR.png",  // Slide 3
+            "https://i.imgur.com/UZgiB5y.jpeg", // Slide 4
+            "https://i.imgur.com/X0zuTbz.jpeg", // Slide 5
+            "https://i.imgur.com/mvbeQe9.jpeg", // Slide 6
+            "https://i.imgur.com/TXOq6gS.jpeg"  // Slide 7
+        ];
+
+        function updateProgressBar() {
+            const progress = (currentSlide / totalSlides) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+        }
+
+        function updateSlideImage() {
+            document.getElementById('slideImage').src = slideImages[currentSlide - 1];
+        }
+
+       function showSlide(slideNumber) {
+            // Hide all slides
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+
+            // Show the current slide
+            document.getElementById(`slide${slideNumber}`).classList.add('active');
+
+	   // Update the slide image
+    updateSlideImage(); // Ensure the image updates on each slide change
+
+            // Update button visibility
+            if (slideNumber === 1) {
+                document.getElementById('prevBtn').style.display = 'none';  // Hide Previous button on the first slide
+                document.getElementById('nextBtn').style.display = 'none';  // Hide Next button on the first slide
+                document.getElementById('startLearningBtn').style.display = 'inline-block'; // Show Start button on first slide
+            } else {
+                document.getElementById('prevBtn').style.display = 'inline-block'; // Show Previous button from the second slide onward
+                document.getElementById('nextBtn').style.display = 'inline-block'; // Show Next button from the second slide onward
+                document.getElementById('startLearningBtn').style.display = 'none'; // Hide Start button after first slide
+            }
+
+            // Disable Previous and Next buttons on the first and last slides
+            document.getElementById('prevBtn').disabled = slideNumber === 1;
+            document.getElementById('nextBtn').disabled = slideNumber === totalSlides;
+
+
+
+            updateProgressBar();
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="quiz"]:checked');
+            const message = document.getElementById('quizMessage');
+            if (!selectedOption) {
+                message.textContent = "Please select an answer.";
+                message.style.color = "red";
+                return;
+            }
+            if (selectedOption.value === "correct") {
+                message.textContent = "Correct! Stable blood sugar levels improve energy and focus.";
+                message.style.color = "green";
+
+        // Show Congratulations after a delay
+        setTimeout(() => {
+            document.querySelector('.container').style.display = 'none'; // Hide slides container
+            document.querySelector('.progress-bar').style.display = 'none'; // Hide progress bar
+            document.getElementById('congratulations').style.display = 'block'; // Show congratulations section
+        }, 1000);
+
+            } else {
+                message.textContent = "Incorrect. Try again!";
+                message.style.color = "red";
+            }
+        }
+function disableModuleNavigation() {
+    // Hide the congratulations message
+    document.getElementById('congratulations').style.display = 'none';
+    // Hide previous and next buttons
+    document.getElementById('previousButton').style.display = 'none';
+    document.getElementById('nextButton').style.display = 'none';
+    // Show content for Module 2 and hide Module 1 slide
+    document.getElementById('slide2').classList.add('active'); // Show slide for Module 2
+    document.getElementById('slide1').classList.remove('active'); // Hide Module 1 slide
+    
+    // Remove button functionality (turning it into a dummy)
+    document.getElementById('nextModuleBtn').disabled = true;  // Disable the button after click
+}
+
+
+
+        showSlide(currentSlide);
+        updateProgressBar();
+    </script>
+</body>
+</html>

@@ -158,8 +158,10 @@
 
     <div class="container">
         <!-- Dynamic Image -->
-        <img id="slideImage" src="https://live.staticflickr.com/65535/54269286878_0f67062377_m.jpg" alt="Slide Image">
+	    <img id="slideImage" src="https://raw.githubusercontent.com/Kas-byte/E--learning-Project-1-Introduction-of-Healthy-Eating/main/1.jpg" alt="Slide Image">
 
+
+	    
         <!-- Content -->
         <div class="content">
             <!-- Slide 1: Introduction -->
@@ -253,15 +255,16 @@
         const totalSlides = 7;
 
         const slideImages = [
-            "https://live.staticflickr.com/65535/54269286878_0f67062377_m.jpg", // Slide 1
-            "https://i.imgur.com/ahnPbFZ.jpeg", // Slide 2
-            "https://i.imgur.com/VDk2mmR.png",  // Slide 3
-            "https://i.imgur.com/UZgiB5y.jpeg", // Slide 4
-            "https://i.imgur.com/X0zuTbz.jpeg", // Slide 5
-            "https://i.imgur.com/mvbeQe9.jpeg", // Slide 6
-            "https://i.imgur.com/TXOq6gS.jpeg"  // Slide 7
+             "https://raw.githubusercontent.com/Kas-byte/E--learning-Project-1-Introduction-of-Healthy-Eating/main/1.jpg", // Slide 1
+             "https://raw.githubusercontent.com/Kas-byte/E--learning-Project-1-Introduction-of-Healthy-Eating/main/2.jpg", // Slide 2
+             "https://raw.githubusercontent.com/Kas-byte/E--learning-Project-1-Introduction-of-Healthy-Eating/main/3.jpg", // Slide 3
+             "https://raw.githubusercontent.com/Kas-byte/E--learning-Project-1-Introduction-of-Healthy-Eating/main/4.jpg", // Slide 4
+             "https://raw.githubusercontent.com/Kas-byte/E--learning-Project-1-Introduction-of-Healthy-Eating/main/5.jpg", // Slide 5
+             "https://raw.githubusercontent.com/Kas-byte/E--learning-Project-1-Introduction-of-Healthy-Eating/main/6.jpg", // Slide 6
+             "https://raw.githubusercontent.com/Kas-byte/E--learning-Project-1-Introduction-of-Healthy-Eating/main/7.jpg"  // Slide 7
         ];
 
+	
         function updateProgressBar() {
             const progress = (currentSlide / totalSlides) * 100;
             document.getElementById('progressFill').style.width = `${progress}%`;
